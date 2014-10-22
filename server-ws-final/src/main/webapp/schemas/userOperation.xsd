@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.bergit.com/webservice/schemas/user" 
+            elementFormDefault="qualified"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:tnt="http://www.bergit.com/webservice/schemas/user" 
+            xmlns="http://www.bergit.com/webservice/schemas/user" >
+    <xsd:annotation>
+        <xsd:documentation>XML Schema used to hold Register/Authentification message</xsd:documentation>
+    </xsd:annotation>
+
+
+<!--xsd for LOGIN--><!--Function-->
+<xsd:element name="AuthentificationServiceUserRequest">
+    <xsd:complexType>
+        <xsd:sequence>
+            <xsd:element name="request" type="tnt:LoginRequest" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:element>
+
+<!--xsd for LOGIN--><!--Entity-->
+<xsd:complexType  name="LoginRequest">
+    <xsd:sequence>
+        <xsd:element name="email"    type="xsd:string" />
+        <xsd:element name="password" type="xsd:string" />
+    </xsd:sequence>
+</xsd:complexType>
+<xsd:element name="AuthentificationServiceUserResponse">
+    <xsd:complexType>
+        <xsd:sequence>
+            <xsd:element name="response" type="tnt:LoginResponse" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:element>
+<xsd:complexType  name="LoginResponse">
+     <xsd:sequence>
+         <xsd:element  name="firstname"  type="xsd:string" />
+         <xsd:element  name="role"       type="xsd:string" />
+         <xsd:element  name="email"      type="xsd:string" />
+         <xsd:element  name="status" type="tnt:RegisterUserStatusType" /> 
+     </xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="RegisterUserStatusType">
+    <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="SUCCESS" />
+        <xsd:enumeration value="WRONG_DATA" />
+        <xsd:enumeration value="USER_EXIST" />
+    </xsd:restriction>
+</xsd:simpleType>  
+
+<!--xsd for REGISTER--><!--Function-->
+<xsd:element name="RegisterServiceUserRequest">
+    <xsd:complexType>
+        <xsd:sequence>
+            <xsd:element name="request" type="tnt:RegisterUserRequest" />
+        </xsd:sequence>     
+    </xsd:complexType>
+</xsd:element>
+<xsd:element name="RegisterServiceUserResponse">
+    <xsd:complexType>
+        <xsd:sequence>
+            <xsd:element name="request" type="tnt:RegisterUserResponse" />
+        </xsd:sequence>     
+    </xsd:complexType>
+</xsd:element>
+<xsd:complexType  name="RegisterUserRequest">
+    <xsd:sequence>
+        <xsd:element name="firstName"    type="xsd:string" />
+        <xsd:element name="lastName"     type="xsd:string" />
+        <xsd:element name="emailAddress" type="xsd:string" />
+        <xsd:element name="password"     type="xsd:string" />           
+    </xsd:sequence>
+</xsd:complexType>
+<xsd:complexType  name="RegisterUserResponse">
+    <xsd:sequence>
+        <xsd:element name="status" type="tnt:RegisterUserStatusType" />
+    </xsd:sequence>
+</xsd:complexType>
+
+</xsd:schema>   

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <display-name>server-ws-final</display-name>
+	<session-config>
+	  <session-timeout>30</session-timeout>
+	</session-config>
+	<welcome-file-list>
+	  <welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<!-- 	Config listerner for Log4j -->
+	<context-param>
+	    <param-name>log4jConfigLocation</param-name>
+	    <param-value>/WEB-INF/config/log4j.properties</param-value>
+	</context-param>
+	<listener>
+	    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	<!-- 	Config listener for application Context -->
+	<context-param> 
+	  <param-name>contextConfigLocation</param-name>  
+	  <param-value>/WEB-INF/config/*-config.xml</param-value>  
+	</context-param>  
+	<listener>  
+	 <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
+	</listener> 
+	<!--   Config Servlet for WS --> 
+	<servlet>  
+	  <description>This servlet is used to Config for the configuration of WebService</description>
+	  <servlet-name>webservices</servlet-name>  
+	  <servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+	  <init-param>  
+	   <param-name>transformWsdlLocations</param-name>  
+	   <param-value>true</param-value>
+	  </init-param>  
+	  <load-on-startup>1</load-on-startup>  
+	</servlet>  
+	<servlet-mapping>
+	  <servlet-name>webservices</servlet-name>  
+	  <url-pattern>*.wsdl</url-pattern>  
+	</servlet-mapping>  
+	<servlet-mapping>  
+	  <servlet-name>webservices</servlet-name>  
+	  <url-pattern>/myEndPoints/*</url-pattern>  
+	</servlet-mapping> 
+</web-app>
